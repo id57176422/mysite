@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vita main</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('.slider').bxSlider({
+        auto : true,
+        speed : 1000,
+        pause : 2000,
+        mode : 'horizontal',
+        pager : false,
+        autoHover : true,
+    });
+});
+</script>
+
+</head>
+<body>
+
+
+  {% extends 'base.html' %} <!-- 템플릿 상속 -->
+  {% block content %}
+    <div class="box-1">
+        <button class="main_button">상품</button>
+        <button class="main_button">가격랭킹</button>
+        <button class="main_button">함유량랭킹</button>
+        <button class="main_button">게시판</button>
+    </div>>
+    <div style="width:57%; margin:auto;" >
+        <div class="slider" style="width:80%; height:400px;">
+        <div ><img src="/static/imgs/images01.jpg" /></div>
+        <div ><img src="/static/imgs/images02.jpg" /></div>
+        <div ><img src="/static/imgs/images03.jpg" /></div>
+        <div><img src="/static/imgs/images05.jpg" /></div>
+        <div><img src="/static/imgs/images06.jpg" /></div>
+        <div><img src="/static/imgs/images04.jpg" /></div>
+        </div>
+    </div>
+
+    <br>
+  {% endblock %}
+</body>
+</html>

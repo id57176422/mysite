@@ -10,13 +10,38 @@
     <!-- 개발자가 만든 pybo CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'style.js' %}">
+<script>
+    $(function () {
+        $(".left_sub_menu").hide();
+        $(".has_sub").click(function () {
+            $(".left_sub_menu").fadeToggle(300);
+        });
+        // 왼쪽메뉴 드롭다운
+        $(".sub_menu ul.small_menu").hide();
+        $(".sub_menu ul.big_menu").click(function () {
+            $("ul", this).slideToggle(300);
+        });
+        // 외부 클릭 시 좌측 사이드 메뉴 숨기기
+        $('.overlay').on('click', function () {
+            $('.left_sub_menu').fadeOut();
+            $('.hide_sidemenu').fadeIn();
+        });
+    });
+</script>
+
     <title>Title</title>
 </head>
 <body>
     <!-- 내비게이션바 추가-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <a class="navbar-brand" href="{% url 'pybo:index' %}">Vita God</a>
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning border-bottom">
+        <a class="navbar-brand" href="{% url 'pybo:index' %}">
+            <img src="{% static 'nanavar.png' %}." alt="image" width="170" height="35">
+        </a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="검색어 입력" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0 bg-light text-warning" type="submit">검색<i class="bi bi-search"></i></button>
+            </form>
         <!-- 토글이 버튼 햄버거모양-->
         <button class="navbar-toggle ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -26,19 +51,14 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     {% if user.is_authenticated %}
-                        <a class="nav-link" href="%{ url 'common:logout' %}">{{user.username}}님(로그아웃)</a>
+                    <a class="nav-link" href="%{ url 'common:logout' %}">{{user.username}}님(로그아웃)</a>
                     {% else %}
                     <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
                     {% endif %}
                 </li>
             </ul>
-
         </div>
     </nav>
-    <div class="container">
-        <!-- Content here -->
-    </div>
-
 
     <!-- 기본 템플릿 안에 삽입될 내용-->
     {% block content %}
@@ -46,13 +66,20 @@
     <!-- 먼저 jquery 자바스크립트 적용 -->
     <script src="{% static 'jquery-3.6.3min.js' %}"></script>
      <!-- bootstrap 자바스크립트 적용 -->
-    <script src="{% static 'bootstrap.min.js' %"></script>
-    <footer class="footer">
-        <h3 style="color:DodgerBlue">스마트 인재 개발원 3조</h3>
-        <p>Author:jyi
-            <a href="zz@naver.com">zz@naver.com</a>
-        </p>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
 
+    <hr>
+    <footer>
+
+        <div class="footer-1">
+            <h6 style="color:DodgerBlack">주소:서울특별시 서초구 동작대로 132 안석빌딩 9층</h6>
+            <h8> 전화번호:02-599-8697</h8>
+            <h8><p>Project: 3Group</p> </h8>
+            <!--<a href="zz@naver.com">zz@naver.com</a>-->
+        </div>
     </footer>
+
+
 </body>
+
 </html>

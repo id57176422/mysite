@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% extends 'base.html' %} <!-- 템플릿 상속 -->
+    {% block content %}
+    <div>
+        <label>아이디</label>{{form.name}}
+    </div>
+    <div>
+        {{form.password}}
+    </div>
+    <div>
+        {{form.email}}
+    </div>
+
+
+    {% endblock %}
+</body>
+</html>
