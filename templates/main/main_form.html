@@ -27,10 +27,18 @@ $(document).ready(function() {
   {% extends 'base.html' %} <!-- 템플릿 상속 -->
   {% block content %}
     <div class="box-1">
-        <button class="main_button">상품</button>
-        <button class="main_button">가격랭킹</button>
-        <button class="main_button">함유량랭킹</button>
-        <button class="main_button">게시판</button>
+        <button class="main_button">
+            <a href="{% url 'main:product' %}">상품</a>
+        </button>
+        <button class="main_button">
+            <a href="{% url 'main:price' %}">가격 랭킹</a>
+        </button>
+        <button class="main_button">
+            <a href="{% url 'main:contentform' %}">함유량 랭킹</a>
+        </button>
+        <button class="main_button">
+            <a href="{% url 'pybo:index' %}">게시판</a>
+        </button>
     </div>>
     <div style="width:57%; margin:auto;" >
         <div class="slider" style="width:80%; height:400px;">

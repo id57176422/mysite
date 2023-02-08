@@ -20,14 +20,19 @@ from django.urls import path, include
 from pybo import views
 from main import views
 
+#ex) path('main/', include('main.urls')), 메인에있는 폴더의 url을 가져오겟다
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pybo/', include('pybo.urls')),
     path('', include('main.urls')),
     path('common/', include('common.urls')),
     path('main/', include('main.urls')),
-    #path('', views.index, name='index'),
+    path('', views.main, name='main'),
     path('v1/', include('v1.urls')),
+    path('product/', views.product, name='product'),
+    path('contentform/', views.contentform, name='contentform'),
+    path('price/', views.price, name='price'),
 ]
 
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  {% extends 'base.html' %} <!-- 템플릿 상속 -->
+  {% block content %}
+  <div id="container-5">
+    <div id="left-sidebar">
+
+      <div id="wrapper" style="width=100%;">
+          <div style="width:10%; height:80%; float:left;">
+              <div class="topbar" style="position: absolute; margin-left:50px; top:25%;">
+              <div class="left_sub_menu">
+                  <div class="sub_menu">
+                  <ul class="big_menu">
+                      <li><button class="btn1">가격 랭킹</button></li>
+                      <li><button class="btn1">함유량 랭킹</button></li>
+                      <li><button class="btn1">게시판</button></li>
+                      <li><button class="btn1">마이 페이지</button></li>
+                  </ul>
+                  </div>
+              </div>
+          </div>
+
+          </div>
+
+      <br>
+      <br>
+      <hr>
+      </div>
+
+    </div>
+    <div id="center-sidebar" style="text-align:center">
+      테스트용
+    </div>
+    <div id="right-sidebar"></div>
+
+
+
+  </div>
+{% endblock %}
+</body>
+</html>

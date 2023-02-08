@@ -243,6 +243,11 @@ ul {
     border:0px solid #99ccff;
 
 }
+a
+{
+    color:white;
+}
+
 .btn1:hover {
     color: ff5858;
     background-color: #e1e1e1;

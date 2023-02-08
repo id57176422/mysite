@@ -20,7 +20,7 @@ def detail(request, question_id):
 
 #요청게시판
 def question(request):
-    page = request.GET.get('page','1')
+    page = request.GET.get('page', '1')
     question_list = Question.objects.order_by('-create_date')
     paginator = Paginator(question_list, 10) # 한페이지당 10개씩
     page_obj = paginator.get_page(page)

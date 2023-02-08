@@ -24,3 +24,11 @@ from .models import User
 def main(request):
     return render(request, 'main/main_form.html')
 
+def product(request):
+    return render(request, 'main/product.html')
+
+def contentform(request):
+    return render(request, 'main/contentform.html')
+
+def price(request):
+    return render(request, 'main/price.html')
