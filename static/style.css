@@ -17,7 +17,8 @@ html,body{
 
 }
 
-#body-content{
+#body-content
+{
     margin-top: 100px
     padding-bottom:99999px
 }
@@ -29,6 +30,8 @@ footer
     height:99999px;
     bottom:0px;
     margin:auto;
+
+
 
 }
 

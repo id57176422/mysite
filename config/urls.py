@@ -24,7 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pybo/', include('pybo.urls')),
     path('', include('main.urls')),
-    path('search', include('main.urls')),
     path('common/', include('common.urls')),
     path('main/', include('main.urls')),
     #path('', views.index, name='index'),

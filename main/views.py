@@ -19,6 +19,8 @@ from .models import User
     #else:
        # form = UserInfoForm()
         #return render(request, 'main/main_form.html', {'form' : UserInfoForm})
+
+
 def main(request):
     return render(request, 'main/main_form.html')
 
