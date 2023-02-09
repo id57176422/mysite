@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Vita main</title>
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+
 
 <script>
 $(document).ready(function() {
@@ -23,24 +27,25 @@ $(document).ready(function() {
 </head>
 <body>
 
-
   {% extends 'base.html' %} <!-- 템플릿 상속 -->
+  {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}">
   {% block content %}
     <div class="box-1">
         <button class="main_button">
-            <a href="{% url 'main:product' %}">상품</a>
+            <a class = "aa" href="{% url 'main:product' %}">상품</a>
         </button>
         <button class="main_button">
-            <a href="{% url 'main:price' %}">가격 랭킹</a>
+            <a class = "aa" href="{% url 'main:price' %}">가격 랭킹</a>
         </button>
         <button class="main_button">
-            <a href="{% url 'main:contentform' %}">함유량 랭킹</a>
+            <a class = "aa" href="{% url 'main:contentform' %}">함유량 랭킹</a>
         </button>
         <button class="main_button">
-            <a href="{% url 'pybo:index' %}">게시판</a>
+            <a class = "aa" href="{% url 'pybo:index' %}">게시판</a>
         </button>
     </div>>
-    <div style="width:57%; margin:auto;" >
+    <div style="width:68%; margin:auto;"  >
         <div class="slider" style="width:80%; height:400px;">
         <div ><img src="/static/imgs/images01.jpg" /></div>
         <div ><img src="/static/imgs/images02.jpg" /></div>

@@ -19,7 +19,6 @@ from django.urls import path, include
 
 from pybo import views
 from main import views
-
 #ex) path('main/', include('main.urls')), 메인에있는 폴더의 url을 가져오겟다
 
 urlpatterns = [
@@ -27,12 +26,17 @@ urlpatterns = [
     path('pybo/', include('pybo.urls')),
     path('', include('main.urls')),
     path('common/', include('common.urls')),
-    path('main/', include('main.urls')),
+    #path('main/', include('main.urls')),
     path('', views.main, name='main'),
     path('v1/', include('v1.urls')),
-    path('product/', views.product, name='product'),
+    #path('', include('main.urls')),
     path('contentform/', views.contentform, name='contentform'),
     path('price/', views.price, name='price'),
+    path('pindex/', views.pindex, name='pindex'),
+    #path('pybo/mypage/', views.mypage, name='mypage'),
+    #path('', views.index, name='index'),
+    path('mypage/', views.mypage, name='mypage'),
+    path('mypage/change_password/', views.change_password, name='change_password'),
 ]
 
 

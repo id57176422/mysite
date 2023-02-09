@@ -8,19 +8,22 @@
     {% extends 'base.html' %}
     {% block content %}
 
-    <div class="container-5">
+      <div id="container-5">
         <div id="left-sidebar">
 
           <div id="wrapper" style="width=100%;">
               <div style="width:10%; height:80%; float:left;">
-                  <div style="position: absolute; margin-left:30px; top:20%;">
+                  <div class="topbar" style="position: absolute; margin-left:50px; top:25%;">
                   <div class="left_sub_menu">
                       <div class="sub_menu">
                       <ul class="big_menu">
-                          <li><button class="btn1">가격 랭킹</button></li>
-                          <li><button class="btn1">함유량 랭킹</button></li>
-                          <li><button class="btn1">게시판</button></li>
-                          <li><button class="btn1">마이 페이지</button></li>
+                          <li><button class="btn1">
+                              <a class = "aa" href="{% url 'main:product' %}">상품</a>
+                          </button></li>
+                          <li><button class="btn1"><a class = "aa" href="{% url 'main:price' %}">가격 랭킹</a></button></li>
+                          <li><button class="btn1"><a class = "aa" href="{% url 'main:contentform' %}">함유량 랭킹</a></button></li>
+                          <li><button class="btn1"><a class = "aa" href="{% url 'pybo:index' %}">게시판</a></button></li>
+                          <li><button class="btn1"><a class = "aa" href="{% url 'main:mypage' %}">마이 페이지</a></button></li>
                       </ul>
                       </div>
                   </div>
@@ -35,6 +38,18 @@
 
         </div>
         <div id="center-sidebar" style="text-align:center">
+            <div style="text-align:right; margin:auto;">
+                <div class="col-4">
+                    <div class="input-group" style="">
+                        <input type="text" id="search_kw" placeholder="제목 OR 내용" class="form-control" value="{{ kw|default_if_none:''}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
             <div class="container my-3">
                 <table class="table">
                     <thead>
@@ -65,7 +80,7 @@
                                     <td>
                                         {{question.create_date}}
                                     </td>
-                                    <td>{{question.update_counter}}</td>
+                                    <td>{{question.hits}}</td>
                                 </tr>
                             {% endfor %}
                         {% else %}

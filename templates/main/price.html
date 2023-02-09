@@ -7,6 +7,7 @@
 <body>
   {% extends 'base.html' %} <!-- 템플릿 상속 -->
   {% block content %}
+  {% load humanize %}
   <div id="container-5">
     <div id="left-sidebar">
 
@@ -16,10 +17,13 @@
               <div class="left_sub_menu">
                   <div class="sub_menu">
                   <ul class="big_menu">
-                      <li><button class="btn1">가격 랭킹</button></li>
-                      <li><button class="btn1">함유량 랭킹</button></li>
-                      <li><button class="btn1">게시판</button></li>
-                      <li><button class="btn1">마이 페이지</button></li>
+                      <li><button class="btn1">
+                          <a class = "aa" href="{% url 'main:product' %}">상품</a>
+                      </button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'main:price' %}">가격 랭킹</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'main:contentform' %}">함유량 랭킹</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'pybo:index' %}">게시판</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'main:mypage' %}" >마이 페이지</a></button></li>
                   </ul>
                   </div>
               </div>
@@ -34,13 +38,100 @@
 
     </div>
     <div id="center-sidebar" style="text-align:center">
-      테스트용
+            <div style="text-align:right;">
+                <div class="col-4">
+                    <div class="input-group">
+                        <input type="text" id="search_kw" placeholder="제목 OR 내용" class="form-control" value="{{ kw|default_if_none:''}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="container my-3">
+        <table class="table">
+            <thead>
+            <tr class="table-warning text-center">
+                <th>No</th>
+                <th>브랜드명</th>
+                <th>제품명</th>
+                <th>가격</th>
+                <th>구매링크</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if p_list %}
+            {% for pdb in p_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ pdb.brand }}</td>
+                <td>{{ pdb.name }}</td>
+                <td>{{ pdb.price|intcomma }}</td>
+                <td><a href="{{ pdb.http }}">링크</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td>상품목록이 없습니다.</td>
+            </tr>
+            {% endif %}
+
+            </tbody>
+
+        </table>
+                <!-- 페이징처리 -->
+                <ul class="pagination justify-content-center">
+                    <!-- 이전페이지 -->
+                    {% if p_list.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ p_list.previous_page_number }}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <!-- 페이지리스트 -->
+                    {% for page_number in p_list.paginator.page_range %}
+                    {% if page_number >= p_list.number|add:-5 and page_number <= p_list.number|add:5 %}
+                    {% if page_number == p_list.number %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    <!-- 다음페이지 -->
+                    {% if p_list.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ p_list.next_page_number }}">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                  <!-- 페이징처리 끝 -->
+        </div>
     </div>
     <div id="right-sidebar"></div>
 
 
 
   </div>
-  {% endblock %}
+{% endblock %}
 </body>
 </html>
