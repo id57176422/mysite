@@ -56,6 +56,7 @@
                 <th>브랜드명</th>
                 <th>제품명</th>
                 <th>가격</th>
+                <th>가성비랭킹</th>
                 <th>구매링크</th>
             </tr>
             </thead>
@@ -67,6 +68,7 @@
                 <td>{{ pdb.brand }}</td>
                 <td>{{ pdb.name }}</td>
                 <td>{{ pdb.price|intcomma }}</td>
+                <td>{{ pdb.vprsumr }}</td>
                 <td><a href="{{ pdb.http }}">링크</a></td>
             </tr>
             {% endfor %}
@@ -128,9 +130,6 @@
         </div>
     </div>
     <div id="right-sidebar"></div>
-
-
-
   </div>
 {% endblock %}
 </body>
