@@ -16,9 +16,8 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password) #인증을하는함수
             login(request, user)
-            return redirect('index')
+            return redirect('main')
 
     else: #클라이언트에서 GET 요청
         form = UserForm()
-        context = {'form': form}
-    return render(request, 'common/signup.html',context)
+    return render(request, 'common/signup.html', {'form' : form})
