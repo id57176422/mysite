@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Vita Mypage</title>
 </head>
 <body>
   {% extends 'base.html' %} <!-- 템플릿 상속 -->
@@ -20,7 +20,7 @@
                       </button></li>
                       <li><button class="btn1"><a class = "aa" href="{% url 'main:price' %}">가격 랭킹</a></button></li>
                       <li><button class="btn1"><a class = "aa" href="{% url 'main:contentform' %}">함유량 랭킹</a></button></li>
-                      <li><button class="btn1"><a class = "aa" href="{% url 'pybo:index' %}">게시판</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'pybo:question' %}">게시판</a></button></li>
                       <li><button class="btn1"><a class = "aa" href="{% url 'main:mypage' %}" >마이 페이지</a></button></li>
                   </ul>
                   </div>
@@ -48,6 +48,15 @@
     <div id="right-sidebar">
     </div>
   </div>
+      <hr>
+    <footer>
+        <div class="footer-1">
+            <h6 style="color:DodgerBlack">주소:서울특별시 서초구 동작대로 132 안석빌딩 9층</h6>
+            <h8> 전화번호:02-599-8697</h8>
+            <h8><p>Project: 3Group</p> </h8>
+            <!--<a href="zz@naver.com">zz@naver.com</a>-->
+        </div>
+    </footer>
     {% endblock %}
 
 </body>

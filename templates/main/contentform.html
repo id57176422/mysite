@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Vita Contain</title>
 </head>
 <body>
   {% extends 'base.html' %} <!-- 템플릿 상속 -->
@@ -10,26 +10,24 @@
   {% load humanize %}
   <div id="container-5">
     <div id="left-sidebar">
-
       <div id="wrapper" style="width=100%;">
-          <div style="width:10%; height:80%; float:left;">
-              <div class="topbar" style="position: absolute; margin-left:50px; top:25%;">
-              <div class="left_sub_menu">
-                  <div class="sub_menu">
+      <div class="topbar" style="position: absolute; margin-left:50px; top:25%;">
+          <div class="left_sub_menu">
+              <div class="sub_menu">
                   <ul class="big_menu">
                       <li><button class="btn1">
-                          <a class = "aa" href="{% url 'main:product' %}">상품</a>
+                          <a class = "aa" href="{% url 'main:contentform' %}">상품</a>
                       </button></li>
                       <li><button class="btn1"><a class = "aa" href="{% url 'main:price' %}">가격 랭킹</a></button></li>
                       <li><button class="btn1"><a class = "aa" href="{% url 'main:contentform' %}">함유량 랭킹</a></button></li>
-                      <li><button class="btn1"><a class = "aa" href="{% url 'pybo:index' %}">게시판</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'pybo:question' %}">게시판</a></button></li>
                       <li><button class="btn1"><a class = "aa" href="{% url 'main:mypage' %}" >마이 페이지</a></button></li>
                   </ul>
-                  </div>
               </div>
           </div>
 
-          </div>
+
+      </div>
 
       <br>
       <br>
@@ -38,17 +36,24 @@
 
     </div>
     <div id="center-sidebar" style="text-align:center">
-            <div style="text-align:right;">
-                <div class="col-4">
-                    <div class="input-group">
-                        <input type="text" id="search_kw" placeholder="제목 OR 내용" class="form-control" value="{{ kw|default_if_none:''}}">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-                        </div>
+        <div style="text-align:right;">
+            <div class="col-4">
+                <div class="input-group">
+                    <input type="text" id="search_kw" placeholder="함유량 검색" class="form-control" value="{{ kw|default_if_none:''}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                        <form id="searchForm" action="{% url 'main:contentform' %}" method="get" >
+                            <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+                            <input type="hidden" id="page" name="page" value="{{ page }}">
+                        </form>
                     </div>
                 </div>
             </div>
-        <div class="container my-3">
+        </div>
+        <table class="container my-3">
+        <table class="table" style="text-algin:right:">
+            총 {{ p_list.paginator.count }} 건 출력되었습니다.
+            <thead>
         <table class="table">
             <thead>
             <tr class="table-warning text-center">
@@ -57,17 +62,19 @@
                 <th>제품명</th>
                 <th>가격</th>
                 <th>함유량</th>
+                <th>구매링크</th>
             </tr>
             </thead>
             <tbody>
             {% if p_list %}
             {% for pdb in p_list %}
             <tr>
-                <td>{{ forloop.counter }}</td>
+                <td>{{ p_list.start_index|add:forloop.counter0 }}</td>
                 <td>{{ pdb.brand }}</td>
                 <td>{{ pdb.name }}</td>
                 <td>{{ pdb.price|intcomma }}</td>
-                <td>{{ pdb.maintain|intcomma }}</td>
+                <td>{{ pdb.maintain|intcomma}} </td>
+                <td><a href="{{ pdb.http }}">링크</a></td>
             </tr>
             {% endfor %}
             {% else %}
@@ -75,58 +82,95 @@
                 <td>상품목록이 없습니다.</td>
             </tr>
             {% endif %}
+
             </tbody>
         </table>
-                <!-- 페이징처리 -->
-                <ul class="pagination justify-content-center">
-                    <!-- 이전페이지 -->
-                    {% if p_list.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ p_list.previous_page_number }}">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    <!-- 페이지리스트 -->
-                    {% for page_number in p_list.paginator.page_range %}
-                    {% if page_number >= p_list.number|add:-5 and page_number <= p_list.number|add:5 %}
-                    {% if page_number == p_list.number %}
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                    {% endif %}
-                    {% endif %}
-                    {% endfor %}
-                    <!-- 다음페이지 -->
-                    {% if p_list.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ p_list.next_page_number }}">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-                  <!-- 페이징처리 끝 -->
-        </div>
-    </div>
-    <div id="right-sidebar"></div>
+        <table>
 
+
+            <!-- 페이징처리 -->
+            <ul class="pagination justify-content-center">
+                <!-- 이전페이지 -->
+                {% if p_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" data-page="{{ p_list.previous_page_number }}" href="javascript:void(0)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in p_list.paginator.page_range %}
+                {% if page_number >= p_list.number|add:-5 and page_number <= p_list.number|add:5 %}
+                {% if page_number == p_list.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">{{ page_number }}</a>
+                </li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                {% if p_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" data-page="{{ p_list.next_page_number }}" href="javascript:void(0)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:void(0)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            </thead>
+        </table>
+    </div>
+    <div id="right-sidebar"></div>>
+      <!-- 페이징처리 끝 -->
+
+  </div>
+    <script type='text/javascript'>
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
+        document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        document.getElementById('searchForm').submit();
+    });
+        $(document).ready(function() {
+            $( "select[name=month]" ).val( "{{ month_text }}" );
+            $('select[name=month]').change(function () {
+            console.log($('select[name=month]').val());
+            month = $('select[name=month]').val();
+            $('.form').submit();
+        });
+    });
+    </script>
+    <footer>
+        <div class="footer-1">
+            <h6 style="color:DodgerBlack">주소:서울특별시 서초구 동작대로 132 안석빌딩 9층</h6>
+            <h8> 전화번호:02-599-8697</h8>
+            <h8><p>Project: 3Group</p> </h8>
+            <!--<a href="zz@naver.com">zz@naver.com</a>-->
+        </div>
+    </footer>
 
   </div>
 {% endblock %}

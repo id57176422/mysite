@@ -53,15 +53,18 @@ def contentform(request):
    #     list.append(main.models.uptest(brand=row[0], name=row[1], price=row[2], http=row[3]))
    # main.models.uptest.objects.bulk_create(list)
    page = request.GET.get('page','1')  # GET 방식으로 정보를 받아오는 데이터
-   kw=request.GET.get('kw','') #검색어
-   board_list = taintain.objects.all()  # models.py Board 클래스의 모든 객체를 board_list에 담음
-   paginator = Paginator(board_list, 10)  # Paginator(분할될 객체, 페이지 당 담길 객체수)
-   page_obj = paginator.get_page(page)  # 페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
+   kw=request.GET.get('kw','') #검색어 .order_by('vprsumr')
+   board_list = taintain.objects.order_by('-maintain')  # models.py Board 클래스의 모든 객체를 board_list에 담음
+     # Paginator(분할될 객체, 페이지 당 담길 객체수)
+     # 페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
    if kw:
        board_list=board_list.filter(
-           Q(brand_icontains=kw)|
-           Q(name_icontains=kw)
-       ).dstinct()
+
+           Q(maintain__icontains=kw)
+           #Q(price__maintain=kw)
+       ).distinct()
+   paginator = Paginator(board_list, 10)
+   page_obj = paginator.get_page(page)
     #pdb_list = uptest15.objects.order_by('id') #하이픈(-) 붙이면 내림차순 안 붙이면 오름차순
    context = {'p_list': page_obj, 'kw':kw}
    return render(request, 'main/contentform.html', context)
@@ -106,14 +109,16 @@ def price(request):
    page = request.GET.get('page','1')  # GET 방식으로 정보를 받아오는 데이터
    kw=request.GET.get('kw','') #검색어
    board_list = lastup.objects.order_by('vprsumr')  # models.py Board 클래스의 모든 객체를 board_list에 담음
-   paginator = Paginator(board_list, 10)  # Paginator(분할될 객체, 페이지 당 담길 객체수)
-   page_obj = paginator.get_page(page)  # 페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
+     # Paginator(분할될 객체, 페이지 당 담길 객체수)
+
    if kw:
        board_list=board_list.filter(
-           Q(brand_icontains=kw)|
-           Q(name_icontains=kw)
-       ).dstinct()
-    #pdb_list = uptest15.objects.order_by('id') #하이픈(-) 붙이면 내림차순 안 붙이면 오름차순
+           Q(vprsumr__icontains=kw)|
+           Q(price__icontains=kw)
+       ).distinct()
+   paginator = Paginator(board_list, 10)
+   page_obj = paginator.get_page(page)  # 페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
+   #pdb_list = uptest15.objects.order_by('id') #하이픈(-) 붙이면 내림차순 안 붙이면 오름차순
    context = {'p_list': page_obj, 'kw':kw}
    return render(request, 'main/price.html', context)
 

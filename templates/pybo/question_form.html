@@ -23,7 +23,7 @@
   <form method="post">
     {% csrf_token %}
       <div class="form-group">
-          <input id="inputTitle" placeholder="제목을 입력하세요" style="width:100%;"/>
+          <input id="inputTitle" placeholder="제목을 입력하세요" name="subject" style="width:100%;"/>
 
           <textarea id="summernote" class="form-control" name="content">
               {{ form.content.value|default_if_none:'' }}

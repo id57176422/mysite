@@ -55,7 +55,7 @@ class taintain(models.Model):
     brand = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
-    maintain = models.CharField(max_length=100)
+    maintain = models.IntegerField()
 
 class lastup(models.Model):
     brand = models.CharField(max_length=100,null=True)
