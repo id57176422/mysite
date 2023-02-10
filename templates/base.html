@@ -11,7 +11,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
     <link rel="stylesheet" type="text/css" href="{% static 'style.js' %}">
-<script>
+         <!-- bootstrap 자바스크립트 적용 -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+
+    <script>
     $(function () {
         $(".left_sub_menu").hide();
         $(".has_sub").click(function () {
@@ -29,9 +32,10 @@
         });
     });
 </script>
-
-    <title>Title</title>
+    <title>base</title>
 </head>
+
+
 <body>
     <!-- 내비게이션바 추가-->
     <nav class="navbar navbar-expand-lg navbar-light bg-warning border-bottom">
@@ -71,10 +75,7 @@
     <!-- 기본 템플릿 안에 삽입될 내용-->
     {% block content %}
     {% endblock %}
-    <!-- 먼저 jquery 자바스크립트 적용 -->
-    <script src="{% static 'jquery-3.6.3min.js' %}"></script>
-     <!-- bootstrap 자바스크립트 적용 -->
-    <script src="{% static 'bootstrap.min.js' %}"></script>
+
 
     <hr>
     <footer>
@@ -87,6 +88,12 @@
     </footer>
 
 
-</body>
+    <!-- 먼저 jquery 자바스크립트 적용 -->
+    <script src="{% static 'jquery-3.6.3min.js' %}"></script>
 
+
+</body>
+<script>
+
+</script>
 </html>

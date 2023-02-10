@@ -265,6 +265,7 @@ a
 #container-5
 {
     width:100%;
+    height:100%;
     margin:auto;
 }
 
@@ -296,4 +297,10 @@ a
 {
     color:white;
 
+}
+
+.bx-wrapper,
+.bx-viewport,
+.bx-wrapper img {
+    height:500px !important;
 }

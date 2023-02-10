@@ -81,13 +81,15 @@ def pindex(request):
    page = request.GET.get('page','1')  # GET 방식으로 정보를 받아오는 데이터
    kw=request.GET.get('kw','') #검색어
    board_list = lastup.objects.all()  # models.py Board 클래스의 모든 객체를 board_list에 담음
-   paginator = Paginator(board_list, 10)  # Paginator(분할될 객체, 페이지 당 담길 객체수)
-   page_obj = paginator.get_page(page)  # 페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
+     # Paginator(분할될 객체, 페이지 당 담길 객체수)
+     # 페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
    if kw:
        board_list=board_list.filter(
-           Q(brand_icontains=kw)|
-           Q(name_icontains=kw)
-       ).dstinct()
+           Q(brand__icontains=kw)|
+           Q(name__icontains=kw)
+       ).distinct()
+   paginator = Paginator(board_list, 10)
+   page_obj = paginator.get_page(page)
     #pdb_list = uptest15.objects.order_by('id') #하이픈(-) 붙이면 내림차순 안 붙이면 오름차순
    context = {'p_list': page_obj, 'kw':kw}
    return render(request, 'main/product.html', context)
