@@ -27,7 +27,7 @@ footer
 {
 
     text-align:center;
-    bottom:0px;
+
     height:200px;
     margin:auto;
 
@@ -267,6 +267,8 @@ a
     width:100%;
     height:100%;
     margin:auto;
+    overflow:auto;
+
 }
 
 #left-sidebar
@@ -283,6 +285,7 @@ a
     width:60%;
     height:700px;
     float:left;
+
 }
 #right-sidebar
 {

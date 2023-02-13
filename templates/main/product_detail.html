@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vita Product</title>
+</head>
+<body>
+  {% extends 'base.html' %} <!-- 템플릿 상속 -->
+  {% block content %}
+  {% load humanize %}
+  <div id="container-5">
+    <div id="left-sidebar">
+      <div id="wrapper" style="width=100%;">
+      <div class="topbar" style="position: absolute; margin-left:50px; top:25%;">
+          <div class="left_sub_menu">
+              <div class="sub_menu">
+                  <ul class="big_menu">
+                      <li><button class="btn1">
+                          <a class = "aa" href="{% url 'main:product' %}">상품</a>
+                      </button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'main:price' %}">가격 랭킹</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'main:contentform' %}">함유량 랭킹</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'pybo:question' %}">게시판</a></button></li>
+                      <li><button class="btn1"><a class = "aa" href="{% url 'main:mypage' %}" >마이 페이지</a></button></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <br>
+      <br>
+      <hr>
+      </div>
+    </div>
+    <div id="center-sidebar" style="text-align:center">
+        {% load humanize %}
+        <table class="table">
+            <thead>
+            <tr class="table-warning text-center"><th Colspan="7">기본 정보</th></tr>
+            <tr class="table-warning text-center">
+                <th>id</th>
+                <th>브랜드</th>
+                <th>제품명</th>
+                <th>가격</th>
+                <th>링크</th>
+                <th>섭취일수</th>
+                <th>카테고리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{p_list.id}}</td>
+                <td>{{p_list.brand}}</td>
+                <td>{{p_list.name}}</td>
+                <td>{{p_list.price|intcomma}}</td>
+                <td><a href="{{ p_list.http }}">링크</a></td>
+                <td>{{p_list.eatday}}</td>
+                <td>{{p_list.cat}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table">
+
+            <thead>
+            <tr class="table-warning text-center"><th Colspan="9">1회섭취량</th></tr>
+            <tr class="table-warning text-center">
+                <th>A(단위ugRE)</th>
+                <th>C(단위mg)</th>
+                <th>D(단위ug)</th>
+                <th>E(단위mg)</th>
+                <th>B1(단위mg)</th>
+                <th>B2(단위mg)</th>
+                <th>B12(단위ug)</th>
+                <th>B6(단위mg)</th>
+                <th>비오틴(단위ug)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{p_list.vo1|intcomma}}</td>
+                <td>{{p_list.vo2|intcomma}}</td>
+                <td>{{p_list.vo3|intcomma}}</td>
+                <td>{{p_list.vo4|intcomma}}</td>
+                <td>{{p_list.vo5|intcomma}}</td>
+                <td>{{p_list.vo6|intcomma}}</td>
+                <td>{{p_list.vo7|intcomma}}</td>
+                <td>{{p_list.vo8|intcomma}}</td>
+                <td>{{p_list.vo9|intcomma}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+            <tr class="table-warning text-center"><th Colspan="9">총함량</th></tr>
+            <tr class="table-warning text-center">
+                <th>A(단위ugRE)</th>
+                <th>C(단위mg)</th>
+                <th>D(단위ug)</th>
+                <th>E(단위mg)</th>
+                <th>B1(단위mg)</th>
+                <th>B2(단위mg)</th>
+                <th>B12(단위ug)</th>
+                <th>B6(단위mg)</th>
+                <th>비오틴(단위ug)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{p_list.vt1|intcomma}}</td>
+                <td>{{p_list.vt2|intcomma}}</td>
+                <td>{{p_list.vt3|intcomma}}</td>
+                <td>{{p_list.vt4|intcomma}}</td>
+                <td>{{p_list.vt5|intcomma}}</td>
+                <td>{{p_list.vt6|intcomma}}</td>
+                <td>{{p_list.vt7|intcomma}}</td>
+                <td>{{p_list.vt8|intcomma}}</td>
+                <td>{{p_list.vt9|intcomma}}</td>
+
+            </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+            <tr class="table-warning text-center"><th Colspan="9">100원당 함량</th></tr>
+            <tr class="table-warning text-center">
+                <th>A(단위ugRE)</th>
+                <th>C(단위mg)</th>
+                <th>D(단위ug)</th>
+                <th>E(단위mg)</th>
+                <th>B1(단위mg)</th>
+                <th>B2(단위mg)</th>
+                <th>B12(단위ug)</th>
+                <th>B6(단위mg)</th>
+                <th>비오틴(단위ug)</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{p_list.vp1|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp2|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp3|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp4|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp5|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp6|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp7|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp8|floatformat:2|intcomma}}</td>
+                <td>{{p_list.vp9|floatformat:2|intcomma}}</td>
+            </tr>
+            </tbody>
+        </table>
+                    <table class="table">
+            <thead>
+            <tr class="table-warning text-center"><th Colspan="11">100원당 함량 순위</th></tr>
+            <tr class="table-warning text-center">
+                <th>A</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>B1</th>
+                <th>B2</th>
+                <th>B12</th>
+                <th>B6</th>
+                <th>비오틴</th>
+                <th>점수</th>
+                <th>종합랭킹</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{p_list.vpr1|intcomma}}위</td>
+                <td>{{p_list.vpr2|intcomma}}위</td>
+                <td>{{p_list.vpr3|intcomma}}위</td>
+                <td>{{p_list.vpr4|intcomma}}위</td>
+                <td>{{p_list.vpr5|intcomma}}위</td>
+                <td>{{p_list.vpr6|intcomma}}위</td>
+                <td>{{p_list.vpr7|intcomma}}위</td>
+                <td>{{p_list.vpr8|intcomma}}위</td>
+                <td>{{p_list.vpr9|intcomma}}위</td>
+                <td>{{p_list.vprsum|intcomma}}</td>
+                <td>{{p_list.vprsumr|intcomma}}위</td>
+            </tr>
+            </tbody>
+        </table>
+        </table>
+                    <table class="table">
+            <thead>
+            <tr class="table-warning text-center"><th Colspan="11">함량 순위</th></tr>
+            <tr class="table-warning text-center">
+                <th>A</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>B1</th>
+                <th>B2</th>
+                <th>B12</th>
+                <th>B6</th>
+                <th>비오틴</th>
+                <th>점수</th>
+                <th>종합랭킹</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{p_list.vtr1|intcomma}}위</td>
+                <td>{{p_list.vtr2|intcomma}}위</td>
+                <td>{{p_list.vtr3|intcomma}}위</td>
+                <td>{{p_list.vtr4|intcomma}}위</td>
+                <td>{{p_list.vtr5|intcomma}}위</td>
+                <td>{{p_list.vtr6|intcomma}}위</td>
+                <td>{{p_list.vtr7|intcomma}}위</td>
+                <td>{{p_list.vtr8|intcomma}}위</td>
+                <td>{{p_list.vtr9|intcomma}}위</td>
+                <td>{{p_list.vtrsum|intcomma}}</td>
+                <td>{{p_list.vtrsumr|intcomma}}위</td>
+            </tr>
+            </tbody>
+        </table>
+      <script type='text/javascript'>
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
+        document.getElementById('page').value = 1;  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        document.getElementById('searchForm').submit();
+    });
+        $(document).ready(function() {
+            $( "select[name=month]" ).val( "{{ month_text }}" );
+            $('select[name=month]').change(function () {
+            console.log($('select[name=month]').val());
+            month = $('select[name=month]').val();
+            $('.form').submit();
+        });
+    });
+    </script>
+    <footer>
+        <div class="footer-1">
+            <h6 style="color:DodgerBlack">주소:서울특별시 서초구 동작대로 132 안석빌딩 9층</h6>
+            <h8> 전화번호:02-599-8697</h8>
+            <h8><p>Project: 3Group</p> </h8>
+            <!--<a href="zz@naver.com">zz@naver.com</a>-->
+        </div>
+    </footer>
+  </div>
+{% endblock %}
+</body>
+</html>

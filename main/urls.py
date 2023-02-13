@@ -12,6 +12,6 @@ urlpatterns = [
     #path('pindex', views.pindex, name="pindex"),
     path('mypage/', views.mypage, name='mypage'),
     path('mypage/change_password/', views.change_password, name='change_password'),
-
+    path('product/<int:pdb_id>/', views.detail, name='pdetail'),
 
 ]
